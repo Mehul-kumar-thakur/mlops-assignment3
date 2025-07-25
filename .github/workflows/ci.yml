@@ -33,13 +33,11 @@ jobs:
       - name: Run Docker container (inference test)
         run: docker run --rm mlops-housing-model python src/predict.py
 
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Tag Docker image
         run: docker tag mlops-housing-model ${{ secrets.DOCKER_USERNAME }}/mlops-housing-model
 
       - name: Push image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/mlops-housing-model
-
-      - name: Push image to Docker Hub
-        run: |
-          docker tag mlops-housing-model <your-dockerhub-username>/mlops-housing-model
-          docker push <your-dockerhub-username>/mlops-housing-model
