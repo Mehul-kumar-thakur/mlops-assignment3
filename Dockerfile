@@ -1,15 +1,14 @@
 # Base image
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-# Set working directory
 WORKDIR /app
 
-# Copy code
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-COPY src/ src/
-WORKDIR /app/src
+COPY . .
 
-# Default command
-CMD ["python", "predict.py"]
+# Train the model during image build
+RUN python src/train.py
+
+CMD ["python", "src/predict.py"]
