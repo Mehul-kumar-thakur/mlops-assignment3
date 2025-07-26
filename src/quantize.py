@@ -3,7 +3,7 @@ import torch
 import numpy as np
 
 # Load sklearn model
-model = joblib.load("model.joblib")
+model = joblib.load("src/model.joblib")
 weights = model.coef_
 bias = model.intercept_
 
