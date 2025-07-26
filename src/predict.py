@@ -7,7 +7,7 @@ data = fetch_california_housing()
 X, y = data.data, data.target
 
 # Load model
-model = joblib.load("model.joblib")
+model = joblib.load("src/model.joblib")
 
 # Predict
 y_pred = model.predict(X)
