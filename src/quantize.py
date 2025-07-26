@@ -1,6 +1,7 @@
 import joblib
 import torch
 import numpy as np
+import os
 from sklearn.datasets import fetch_california_housing
 from sklearn.metrics import r2_score
 
@@ -48,10 +49,25 @@ data = fetch_california_housing()
 X = data.data
 y = data.target
 
+# Inference with original sklearn model
+y_pred_sklearn = model.predict(X)
+r2_sklearn = r2_score(y, y_pred_sklearn)
+
 # Torch inference
 model = SimpleModel(weights_dq, bias_dq)
 model.eval()
 with torch.no_grad():
     y_pred = model(torch.tensor(X, dtype=torch.float32)).numpy()
 
-print("R² Score (Quantized):", r2_score(y, y_pred))
+r2_quant = r2_score(y, y_pred )
+
+# Report R² scores
+print("R² Score (Original Sklearn):", round(r2_sklearn, 4))
+print("R² Score (Quantized PyTorch):", round(r2_quant, 4))
+
+# Report model sizes
+size_unquant = os.path.getsize("unquant_params.joblib") / 1024  # in KB
+size_quant = os.path.getsize("quant_params.joblib") / 1024
+
+print("Model Size (unquant_params.joblib):", round(size_unquant, 2), "KB")
+print("Model Size (quant_params.joblib):", round(size_quant, 2), "KB")
