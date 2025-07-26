@@ -1,9 +1,5 @@
 scikit-learn
 joblib
-<<<<<<< HEAD
-torch
-=======
 torch
 pytest
 pytest-timeout
->>>>>>> 1989a67c63cc68316264568572c87e9f274ccd86
