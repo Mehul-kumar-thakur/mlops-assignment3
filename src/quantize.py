@@ -5,7 +5,7 @@ from sklearn.datasets import fetch_california_housing
 from sklearn.metrics import r2_score
 
 # Load sklearn model
-model = joblib.load("model.joblib")
+model = joblib.load("src/model.joblib")
 weights = model.coef_
 bias = model.intercept_
 
