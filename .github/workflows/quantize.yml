@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - name: Checkout repo
+=======
+      - name: Checkout repository
+>>>>>>> 1989a67c63cc68316264568572c87e9f274ccd86
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -20,6 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+<<<<<<< HEAD
           pip install -r requirements.txt
 
       - name: Run training script
@@ -27,3 +32,17 @@ jobs:
 
       - name: Run quantization script
         run: python src/quantize.py
+=======
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run training script
+        run: |
+          echo "Running training to generate model.joblib"
+          python src/train.py
+
+      - name: Run quantization script
+        run: |
+          echo "Running quantization script"
+          python src/quantize.py
+>>>>>>> 1989a67c63cc68316264568572c87e9f274ccd86
