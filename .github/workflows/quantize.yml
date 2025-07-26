@@ -1,0 +1,29 @@
+name: Quantization Pipeline
+
+on:
+  push:
+    branches:
+      - quantization
+
+jobs:
+  quantize_model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run training script
+        run: python /src/train.py
+
+      - name: Run quantization script
+        run: python src/quantize.py
